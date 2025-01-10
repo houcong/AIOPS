@@ -1,9 +1,3 @@
-variable "aws_region" {
-  description = "The AWS region to deploy resources."
-  default     = "us-west-1"
-  
-}
-
 variable "infra_env" {
   type        = string
   description = "Infrastructure environment (e.g., dev, prod)"
@@ -31,35 +25,35 @@ variable "instance_root_device_size" {
 variable "default_region" {
   type        = string
   description = "The region this infrastructure is in"
-  default     = "us-east-2"
+  default     = "us-east-1"
 }
 
 variable "vpc_id" {
   type        = string
   description = "The VPC ID to deploy resources."
-  default = "vpc-0a82a61659c629a5a"
+  default = "vpc-0711ba9b734b968c7"
 }
 
 variable "subnet_id" {
   type        = string
   description = "The subnet ID to deploy resources."
-  default = "subnet-02926446e59c50c1d"
+  default = "subnet-0124bdfb371947be1"
 }
 
 variable "security_group_id" {
   type        = string
   description = "The security group ID to deploy resources."
-  default = "sg-0336bf78eae562f7f"
+  default = "sg-0406e05bf5ea1deef"
 }
 
 variable "key_name" {
   type        = string
   description = "The key pair name to deploy resources"
-  default = "rocher"
+  default = "aos"
 }
 
 variable "ami_id" {
   type        = string
   description = "The AMI ID to deploy resources."
-  default = "ami-0938c2c0d02d50fe1"
+  default = "ami-05576a079321f21f8"
 }
