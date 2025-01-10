@@ -1,7 +1,27 @@
-module "ec2_app" {
-  source                 = "./modules/ec2"
-  infra_env             = var.infra_env
-  infra_role            = "app"
-  instance_size         = var.instance_size
-  instance_root_device_size = var.instance_root_device_size
+
+provider "aws" {
+  region = var.aws_region
+  
+}
+
+resource "aws_security_group" "allow_tls" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = var.vpc_id
+
+# 设置入站规则允许所有IP访问22端口
+
+  ingress {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+# 设置出站规则允许所有IP访问所有端口
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
