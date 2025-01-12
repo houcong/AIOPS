@@ -5,6 +5,6 @@ module "security_group" {
 
 
 # 创建EC2
-module "ec2_app_with_docker" {
+module "ec2_app" {
   source                 = "./modules/ec2"
 }
