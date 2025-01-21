@@ -11,7 +11,7 @@ model_id = "us.amazon.nova-micro-v1:0"  # 确保此模型 ID 是有效的
 # 定义系统提示
 system_prompt = [
     {
-        "text": "你现在是一个运维专家，你的工作是帮助用户解决技术问题,返回正确的函数名称"
+        "text": "请用中文回答"
     }
 ]
 
@@ -113,19 +113,20 @@ payload = {
     }
 }
 
+inf_params = {"max_new_tokens": 300, "top_p": 0.9, "top_k": 20, "temperature": 0.7}
+
 try:
     # 调用模型并发送请求
     response = bedrock_client.invoke_model(
         modelId=model_id,
-        body=json.dumps(payload),
-        contentType='application/json'
+        body=json.dumps(payload)
     )
 
     # 读取响应内容
     response_body = response['body'].read().decode('utf-8')
     response_data = json.loads(response_body)
-    response_message = response_data['choices'][0]['message']
-    tool_calls = response_message['tool_calls']
+    response_message = response_data['choices'][0]['message']['content']
+    tool_calls = response_data['choices'][0]['tool_calls']
 
     print("\nChatGPT want to call function: ", tool_calls)
 
